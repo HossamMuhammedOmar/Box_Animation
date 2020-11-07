@@ -1,4 +1,4 @@
-# box_animation
+# Box Animation
 
 A new Flutter project.
 
