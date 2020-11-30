@@ -3,6 +3,6 @@ import 'package:flutter/material.dart';
 class Cat extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Image.asset('name');
+    return Image.asset('lib/src/images/cat.png');
   }
 }

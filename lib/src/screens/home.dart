@@ -1,3 +1,4 @@
+import 'package:box_animation/src/widgets/cat.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget {
@@ -18,5 +19,7 @@ class HomeState extends State<Home> {
     );
   }
 
-  Widget buildAnimation() {}
+  Widget buildAnimation() {
+    return Cat();
+  }
 }
