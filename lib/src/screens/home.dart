@@ -14,7 +14,6 @@ class HomeState extends State<Home> with TickerProviderStateMixin {
 
   void initState() {
     super.initState();
-
     catController = AnimationController(
       duration: Duration(seconds: 2),
       vsync: this,
@@ -23,6 +22,8 @@ class HomeState extends State<Home> with TickerProviderStateMixin {
       parent: catController,
       curve: Curves.easeIn,
     ));
+
+    catController.forward();
   }
 
   @override
@@ -36,6 +37,15 @@ class HomeState extends State<Home> with TickerProviderStateMixin {
   }
 
   Widget buildAnimation() {
-    return Cat();
+    return AnimatedBuilder(
+      animation: catAnimation,
+      builder: (context, child) {
+        return Container(
+          child: child,
+          margin: EdgeInsets.only(top: catAnimation.value),
+        );
+      },
+      child: Cat(),
+    );
   }
 }
