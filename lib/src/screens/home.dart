@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:box_animation/src/widgets/cat.dart';
 import 'package:flutter/material.dart';
 
@@ -11,6 +13,8 @@ class Home extends StatefulWidget {
 class HomeState extends State<Home> with TickerProviderStateMixin {
   Animation<double> catAnimation;
   AnimationController catController;
+  Animation<double> flapsAnimation;
+  AnimationController flapsController;
 
   void initState() {
     super.initState();
@@ -18,10 +22,24 @@ class HomeState extends State<Home> with TickerProviderStateMixin {
       duration: Duration(milliseconds: 300),
       vsync: this,
     );
-    catAnimation = Tween(begin: -35.0, end: -80.0).animate(CurvedAnimation(
-      parent: catController,
-      curve: Curves.easeIn,
-    ));
+    catAnimation = Tween(begin: -35.0, end: -80.0).animate(
+      CurvedAnimation(
+        parent: catController,
+        curve: Curves.easeIn,
+      ),
+    );
+
+    flapsController = AnimationController(
+      vsync: this,
+      duration: Duration(milliseconds: 200),
+    );
+
+    flapsAnimation = Tween(begin: 0.0, end: 3.14).animate(
+      CurvedAnimation(
+        parent: flapsController,
+        curve: Curves.linear,
+      ),
+    );
   }
 
   @override
@@ -30,6 +48,7 @@ class HomeState extends State<Home> with TickerProviderStateMixin {
       appBar: AppBar(
         title: Text('Animation!'),
       ),
+      backgroundColor: Color(0xffecf0f1),
       body: GestureDetector(
         child: Center(
           child: Stack(
@@ -37,6 +56,7 @@ class HomeState extends State<Home> with TickerProviderStateMixin {
             children: [
               buildCatAnimation(),
               buildBox(),
+              buildLeftFlap(),
             ],
           ),
         ),
@@ -71,8 +91,24 @@ class HomeState extends State<Home> with TickerProviderStateMixin {
   Widget buildBox() {
     return Container(
       width: 200.0,
-      height: 200.0,
-      color: Color(0xff2980b9),
+      height: 170.0,
+      color: Color(0xff3498db),
+    );
+  }
+
+  Widget buildLeftFlap() {
+    return Positioned(
+      left: 7.0,
+      top: 3.0,
+      child: Transform.rotate(
+        angle: pi * 0.6,
+        alignment: Alignment.topLeft,
+        child: Container(
+          height: 7.0,
+          width: 90.0,
+          color: Color(0xff3498db),
+        ),
+      ),
     );
   }
 }
